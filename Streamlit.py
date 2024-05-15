@@ -22,13 +22,15 @@ tab_home, tab_data, tab_charts, tab_model, tab_ins = st.tabs(["Homepage", "Datas
 
 ####################TAB HOMEPAGE#####################
 
-columns_1, columns_2 = tab_home.columns(2, gap="large") #(kolonlari bölebiliriz .columns([1,2]) burada sol tarafa 1 brm saga 2 brm verir.
-columns_1.subheader("**Overview of the Project**")
-columns_1.markdown("* Business Problem ")
-columns_1.markdown ("* Dataset Story")
-columns_1.markdown("* Exploratory Data Analysis(EDA)")
+columns_1, columns_2 = tab_home.columns(2, gap="large")
+columns_1.subheader("**Who is MEDI medical insurance company?**")
+columns_1.markdown("* MEDI Health Insurance Company is one of the leading companies in the sector, known for its innovative approaches and customer-oriented policies.")
+columns_1.markdown("* MEDI's success lies in its data-driven decision-making and analytics approach. By gaining a deeper understanding of its customers' health habits and history, the company develops strategies based on comprehensive data analysis to understand and effectively manage healthcare costs.")
+columns_1.subheader("**Project Phases**")
+columns_1.markdown("* Exploratory Data Analysis")
+columns_1.markdown("* Data Preprocessing")
+columns_1.markdown("* Feature Engineering")
 columns_1.markdown("* Modelling")
-columns_1.markdown("* Business Recommendations")
 columns_2.image("affordable-health-care.webp")
 
 ####################TAB DATASET######################
@@ -49,8 +51,8 @@ column_3.markdown("* **3 Numerical Variables**")
 
 df = get_data()
 column_4.dataframe(df,width=800)
-column_4.subheader("Important Stage in the Project", divider="grey")
-column_4.text("gfnhjh")
+column_4.subheader("❗ Important Stage in the Project", divider="grey")
+column_4.markdown("️To increase the performance of the model, I tried seven different model types by adjusting the hyperparameters and built the model with the :red[GBM] machine learning algorithm that gave the best results.")
 
 #####################TAB CHARTS###############################
 
@@ -119,15 +121,16 @@ def get_model():
 model = get_model()
 
 age = tab_model.text_input('Age')
-sex = tab_model.text_input('Sex: 0: Female, 1: Male')
-bmi = tab_model.text_input('Body Mass Index')
-children = tab_model.number_input('Number of Children', min_value=0, max_value=5)
-smoker = tab_model.text_input('Smoker: 0: No, 1: Yes')
-region = tab_model.text_input('Region of Living: 0: NorthEast, 1: NorthWest, 2: SouthEast, 3: SouthWest')
+sex = tab_model.number_input('Sex: :red[0: Female], :blue[1: Male]', min_value=0, max_value=1)
+bmi = tab_model.text_input('Body Mass Index : :green[weight/(height)²]')
+children = tab_model.number_input('Number of Children', min_value=0)
+smoker = tab_model.number_input('Smoker: :green[0: No], :red[1: Yes]', min_value=0, max_value=1)
+region = tab_model.number_input('Region of Living: :blue[0: NorthEast], :red[1: NorthWest], :green[2: SouthEast], 3: SouthWest',
+                                min_value=0, max_value=3, step=1)
 
 user_input = pd.DataFrame({"age":age, "sex":sex, "bmi":bmi, "children":children, "smoker":smoker, "region":region}, index=[0])
 
-if tab_model.button(':rainbow[Predict!]'):  # butonun calismasi icin if
+if tab_model.button(':rainbow[Predict!]'):
     prediction = model.predict(user_input)
     tab_model.success(f"Predicted Medical Insurance Cost:{round(prediction[0], 2) }")
     tab_model.balloons()
