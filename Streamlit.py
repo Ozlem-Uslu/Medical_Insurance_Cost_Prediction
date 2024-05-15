@@ -1,4 +1,3 @@
-streamimport joblib
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -10,7 +9,7 @@ st.set_page_config(layout="wide")   #görüntünün tüm ekrani kaplamasi icin
 
 @st.cache_data  #veriyi al ön bellege kaydet tekrar calistima demek oluyor
 def get_data():
-    df = pd.read_csv('Final_Project/insurance.csv')
+    df = pd.read_csv('insurance.csv')
     return df
 
 
