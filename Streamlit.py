@@ -17,7 +17,7 @@ def get_data():
 #heryerde gözükmesini istedigin seyleri st ile yaz. basligin ve tablarin her yerde görünmesini istiyorum oyüzden st ile yazariz.
 st.title("👨‍⚕️💊Medical Insurance Cost Prediction💵") #basligin tüm sayfalarda görünmesi icin en basta tutuyorum
 
-tab_home, tab_data, tab_charts, tab_model, tab_ins = st.tabs(["Homepage", "Dataset","Charts", "Model", "Insight"] )
+tab_home, tab_data, tab_charts, tab_model = st.tabs(["Homepage", "Dataset","Charts", "Model"] )
 
 
 ####################TAB HOMEPAGE#####################
@@ -105,7 +105,7 @@ selected_smoker = tab_charts.multiselect(label="Select Smoker", options=df.smoke
 filtered_smoker = df[df.smoker.isin(selected_smoker)]
 
 import plotly.express as px
-fig2 = px.bar(filtered_smoker, x="age", y="charges", color="smoker", width=800, height=700)
+fig2 = px.bar(filtered_smoker, x="age", y="charges", color="smoker",width=800, height=700)
 tab_charts.plotly_chart(fig2, use_container_width=True)
 
 #4.Cost amount according to bmi and smoker
