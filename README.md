@@ -1,3 +1,3 @@
 
-https://medical-insurance-costprediction.streamlit.app/
+https://medicalcostprediction.streamlit.app
 
